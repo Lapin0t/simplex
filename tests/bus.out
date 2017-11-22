@@ -1,0 +1,20 @@
+INFO: maximize:
+INFO:   -x_0 -x_1 -x_2 -x_3 -x_4 -x_5 -x_6
+INFO: subject to:
+INFO:   -x_0           -x_3 -x_4 -x_5 -x_6 <= -17
+INFO:   -x_0 -x_1           -x_4 -x_5 -x_6 <= -21
+INFO:   -x_0 -x_1 -x_2           -x_5 -x_6 <= -15
+INFO:   -x_0 -x_1 -x_2 -x_3           -x_6 <= -20
+INFO:   -x_0 -x_1 -x_2 -x_3 -x_4           <= -23
+INFO:        -x_1 -x_2 -x_3 -x_4 -x_5      <= -15
+INFO:             -x_2 -x_3 -x_4 -x_5 -x_6 <= -9
+INFO:   x_0, x_1, x_2, x_3, x_4, x_5, x_6, x_7, x_8, x_9, x_10, x_11, x_12, x_13 >= 0
+INFO: number of variables: 7
+INFO: number of constraints: 7
+INFO: PHASE 1 (7 bad constraints)
+INFO: PHASE 2 (initial base: [3 9 0 1 4 5 6])
+INFO: number of pivot steps (both phases): 14
+INFO: rule used: greedy
+BOUNDED
+OPTIMAL VALUE:  -73/3
+SOLUTION:  x_0 = 8, x_1 = 22/3, x_2 = 0, x_3 = 10/3, x_4 = 13/3, x_5 = 0, x_6 = 4/3

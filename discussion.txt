@@ -1,0 +1,46 @@
+Discussion
+----------
+
+- I implemented the random rule, but this rule is mostly trivial. It will
+  run in finite time with probability one since it will eventually behave like
+  the Bland rule.
+
+  The most interesting rule is what I called `greedy`. It is a
+  refinement of the `max_coef` rule: it will not only look at the objective
+  coefficient of the entering variable, but the real gain of doing a pivot with
+  this variable (ie take the minimum ratio into account). That way at each
+  iteration it will select the pivot that will make the biggest step towards
+  the optimal solution. I don't have a strong opinion on it, but at least
+  experimentally it doesn't seem to loop.
+
+- The `greedy` pivot rule consistently outperforms the other rules, I did not
+  manage to find an example where it is slower than any other. Sometimes the
+  `max_coef` rule is on par (tests/medium.dat). Still it is interesting to
+  observe that in such cases, the `max_coef` rule has usually a lower
+  variance in the number of steps used (I have no idea why).
+
+  I borrowed the `tests/slow_bland.dat` from romain, I did not study this
+  example precisely but it seems that there is a point with big degeneracy
+  so the bland (and random) rules get stuck, trying every non-improving pivots
+  before seeing the way out. Quite naturally, the `max_coef` and `greedy` rules
+  perform extremely well (only 1 pivot) on these examples as even if there is
+  a single pivot that improves the solution they will have a much greater chance
+  to take it.
+
+  I did not find any cycling example, but this is also because the rules I have
+  written almost all use some random input, which makes them more robust.
+
+- It seems like the program is mostly sensitive to constraints, but i think that
+  this is something generic to basis exchange algorithms for LPs: with few
+  constraints, random LPs tend to be unbounded so there is probably a fast
+  (colinear to the objective) path to the infinity; with lots of constraints
+  there are much more corners in the polytope so each step will be smaller.
+  Besides, the more faces there are, the more the polytope is nicely round
+  (close to an hypersphere), so when getting nearer to the optimum, the steps
+  will get smaller and smaller, and rules like `max_coef` and `greedy` will not
+  be able to perform well.
+
+  For the performances, the solver gives up at around n ~= m ~= 50. When A gets
+  too big, the time to do one iteration goes up quickly, because of many
+  computations require iterating somehow on the whole array (array comparisons
+  and np.where do this).

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "simplex.py", line 286, in <module>
+    steps, (tag, res) = lp.solve(rule=args.rule)
+  File "simplex.py", line 76, in solve
+    for l in str(self).splitlines():
+  File "simplex.py", line 53, in __str__
+    tbl = align_cols([[fmt(*x) for x in enumerate(self.c)],
+  File "simplex.py", line 53, in <listcomp>
+    tbl = align_cols([[fmt(*x) for x in enumerate(self.c)],
+  File "simplex.py", line 51, in fmt
+    return '{:+}x_{}'.format(x, i)
+TypeError: unsupported format string passed to Fraction.__format__
